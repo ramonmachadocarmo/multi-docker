@@ -1,0 +1,24 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+  # BUILD IMAGES FOR TEST
+before_install:
+  - docker build -t ramonmachado/react-test -f ./client/Dockerfile.dev ./client
+  # SCRIPT TO TEST IMAGES
+script:
+  - docker run -e CI=true ramonmachado/react-test npm test
+
+after_success:
+  - docker build -t ramonmachado/multi-client ./client
+  - docker build -t ramonmachado/multi-nginx ./nginx
+  - docker build -t ramonmachado/multi-server ./server
+  - docker build -t ramonmachado/multi-worker ./worker
+  # LOGIN INTO DOCKER CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
+  # TAKE THOSE IMAGES AND PUSH THEM TO DOCKER HUB
+  - docker push ramonmachado/multi-client
+  - docker push ramonmachado/multi-nginx
+  - docker push ramonmachado/multi-server
+  - docker push ramonmachado/multi-worker
