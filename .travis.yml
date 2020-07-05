@@ -23,6 +23,7 @@ after_success:
   - docker push ramonmachado/multi-server
   - docker push ramonmachado/multi-worker
 
+
 depoy:
   provider: elasticbeanstalk
   region: us-east-2
