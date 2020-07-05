@@ -22,16 +22,6 @@ after_success:
   - docker push ramonmachado/multi-nginx
   - docker push ramonmachado/multi-server
   - docker push ramonmachado/multi-worker
-    # access_key_id: $AWS_ACCESS_KEY
-    # secret_access_key: $AWS_SECRET_KEY
-  #   deploy:
-  # edge: true
-  # provider: elasticbeanstalk
-  #  ACCESS KEY ID
-  #  AKIAT63VRC64FMK4ZL4T
-
-  # SECRET ACCESS KEY
-  # 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
 
 depoy:
   provider: elasticbeanstalk
